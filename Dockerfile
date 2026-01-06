@@ -29,4 +29,6 @@ RUN cd / && mkdir openmind && cd openmind && \
 
 WORKDIR /openmind/OM1
 
-CMD ["uv", "run", "src/run.py", "spot"]
+COPY ./entrypoint.sh /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]
+CMD ["spot"]
