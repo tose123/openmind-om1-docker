@@ -28,9 +28,8 @@ RUN cd / && mkdir openmind && cd openmind \
     && cd OM1 && git submodule update --init \
     && uv venv
 
-RUN set -e \
-    && cd /openmind/OM1 \
-    && uv run src/run.py conversation || echo "Command failed but continuing" && true
+COPY ./init_env.sh /openmind/OM1/init_env.sh
+RUN cd /openmind/OM1 && /openmind/OM1/init_env.sh
 
 WORKDIR /openmind/OM1
 
