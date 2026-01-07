@@ -14,6 +14,7 @@ RUN apt-get update && apt-get install -y \
     iputils-ping \
     pkg-config \
     libssl-dev \
+    pulseaudio \
     pulseaudio-utils \
     portaudio19-dev \
     ffmpeg \
@@ -22,10 +23,10 @@ RUN apt-get update && apt-get install -y \
 
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /usr/local/bin/
 
-RUN cd / && mkdir openmind && cd openmind && \
-    git clone --depth=1 https://github.com/OpenMind/OM1.git && \
-    cd OM1 && git submodule update --init && \
-    uv venv
+RUN cd / && mkdir openmind && cd openmind \
+    && git clone --depth=1 https://github.com/OpenMind/OM1.git \
+    && cd OM1 && git submodule update --init \
+    && uv venv
 
 WORKDIR /openmind/OM1
 
