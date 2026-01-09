@@ -25,7 +25,8 @@ COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /usr/local/bin/
 
 RUN cd / && mkdir openmind && cd openmind \
     && git clone --depth=1 https://github.com/OpenMind/OM1.git \
-    && cd OM1 && git submodule update --init \
+    && cd OM1 && git fetch --all --prune && git checkout 26b066f \
+    && git submodule update --init \
     && uv venv
 
 COPY ./init_env.sh /openmind/OM1/init_env.sh
