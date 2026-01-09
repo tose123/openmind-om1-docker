@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-TIMEOUT=180
+TIMEOUT=300
 START_TIME=$(date +%s)
 
 uv run src/run.py spot &
