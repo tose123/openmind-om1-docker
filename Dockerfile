@@ -29,8 +29,11 @@ RUN cd / && mkdir openmind && cd openmind \
     && git submodule update --init \
     && uv venv
 
-COPY ./init_env.sh /openmind/OM1/init_env.sh
-RUN cd /openmind/OM1 && /openmind/OM1/init_env.sh
+COPY ./init_env_conversation.sh /openmind/OM1/init_env_conversation.sh
+COPY ./init_env_spot.sh /openmind/OM1/init_env_spot.sh
+RUN cd /openmind/OM1 \
+    && /openmind/OM1/init_env_conversation.sh \
+    && /openmind/OM1/init_env_spot.sh
 
 WORKDIR /openmind/OM1
 
