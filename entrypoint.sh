@@ -5,5 +5,9 @@ pulseaudio -D --exit-idle-time=-1
 pactl load-module module-null-sink sink_name=virtual_output
 pactl load-module module-virtual-source source_name=virtual_input
 
+if [ -n "$HERTZ" ]; then
+    find config -type f -name "*.json5" -exec sed -i "s/hertz: [0-9]\+\(\.[0-9]\+\)\?,/hertz: ${HERTZ},/g" {} \;
+fi
+
 find config -type f -name "*.json5" -exec sed -i "s/openmind_free/${OM_API_KEY}/g" {} +
 exec uv run src/run.py "$@"
