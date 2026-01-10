@@ -25,8 +25,8 @@ RUN apt-get update && apt-get install -y \
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /usr/local/bin/
 
 RUN cd / && mkdir openmind && cd openmind \
-    && git clone --depth=1 https://github.com/OpenMind/OM1.git \
-    && cd OM1 && git fetch --all --prune && git checkout 26b066f \
+    && git clone https://github.com/OpenMind/OM1.git \
+    && cd OM1 && git fetch --all && git checkout 26b066f29b2a08b74487fa5aa78a5699597a34c8 \
     && git submodule update --init \
     && uv venv
 
