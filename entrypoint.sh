@@ -1,5 +1,11 @@
 #!/bin/bash
-set -e
+set +e
+
+if ! pgrep -x "pulseaudio" > /dev/null; then
+    pulseaudio -D --exit-idle-time=-1
+    pactl load-module module-null-sink sink_name=virtual_output
+    pactl load-module module-virtual-source source_name=virtual_input
+fi
 
 if [ -n "$HERTZ" ]; then
     find config -type f -name "*.json5" -exec sed -i "s/hertz: [0-9]\+\(\.[0-9]\+\)\?,/hertz: ${HERTZ},/g" {} \;
